@@ -113,11 +113,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             resultado=10
             self.flag10=True
 
-        self.limite=resultado
+        self.limite=resultado*20
 
         #Mostrar ProgressBar
         self.timer= QTimer()
-        self.timer.setInterval(1000) #Intervalos de un segundo
+        self.timer.setInterval(50) #Intervalos de un segundo
         self.subdialog.show()
 
         #QTimer
