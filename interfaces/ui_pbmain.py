@@ -35,6 +35,7 @@ class Ui_Dialog(object):
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setValue(24)
+        #self.progressBar.setTextVisible(False)
 
         self.verticalLayout.addWidget(self.progressBar)
 

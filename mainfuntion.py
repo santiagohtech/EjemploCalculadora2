@@ -1,9 +1,8 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QButtonGroup, QProgressBar
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QButtonGroup, QProgressBar, QMessageBox
 from PySide6.QtCore import qDebug, QTimer
 from PySide6.QtGui import *
-from PySide6 import QtCore
+from dialogpb import * #Importar el dialog de la progress bar
 from interfaces.ui_mainwindow import Ui_MainWindow
-from interfaces.ui_pbmain import Ui_Dialog
 import sys
 import re
 
@@ -11,8 +10,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        #Variables
         self.c=0
-        #PRUEBA2
+        self.flag10=False
+        self.limite=0
+
+        #PRUEBA10
         #self.actionSalir.triggered.connect(self.close)
         # creamos la subventana pero no la mostramos
         #self.subventana = Subventana()
@@ -41,27 +45,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #ProgressBar
         self.subdialog = Dialog()
         self.subdialog.progressBar.setValue(0)
+
     def on_click(self, value):
         strlabel=self.label.text()
-
 
         if strlabel=="0": #Validación primer caracter
             if validacion_operacionesdif(value.text()):
                 self.label.setText(value.text())
 
         elif value.text()=="=": #RESULTADO FINAL
-
-            #Mostrar ProgressBar
-            self.timer= QTimer()
-            self.timer.setInterval(1000)
-            self.subdialog.show()
-
-            #QTimer
-            self.c=0
-            self.subdialog.progressBar.reset()
-            self.subdialog.progressBar.setValue(0)
-            self.timer.start()
-            self.timer.timeout.connect(self.counter)
 
             resultado=self.label.text().replace('x', '*')
             #Validación para que no sea una operación el último caracter
@@ -83,9 +75,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     auxres +=resultado[i]
             #Enviar resultados
             print(auxres)
+
+            #Función de dialogo de la Progress Bar
+            self.mostrarDialogo(resultado=int(eval(auxres)))
+
             self.label.setText(str(eval(auxres)))
 
         elif validacion_operacionesigual(value.text()): #No poner dos veces seguidas una operación
+
+            #Función de cerrar en dialogo cuando se oprime una operación
+            self.cerrarDialogoPB()
+
             auxlabel = self.label.text()+value.text()
             listacadena = list(auxlabel)
             #Comparar ultimo caracter con el penultimo
@@ -106,11 +106,47 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.label.setText(self.label.text()+value.text())
 
+    #Función de dialogo de la Progress Bar
+    def mostrarDialogo(self, resultado):
+
+        if resultado>10:
+            resultado=10
+            self.flag10=True
+
+        self.limite=resultado
+
+        #Mostrar ProgressBar
+        self.timer= QTimer()
+        self.timer.setInterval(1000) #Intervalos de un segundo
+        self.subdialog.show()
+
+        #QTimer
+        self.c=0
+        self.subdialog.progressBar.reset()
+        self.subdialog.progressBar.setValue(0)
+        self.timer.start()
+        self.timer.timeout.connect(self.counter)     
+
     #Contador QTimer
     def counter(self):
         self.c +=1
         self.subdialog.progressBar.setValue(self.c)
-        if self.c>=100:
+        if self.c>=self.limite:
+            #Condición para saber si pasaron más de 10 segundos marque un error
+            if self.flag10:
+                self.flag10 = False
+                self.dialogoError()
+
+            self.cerrarDialogoPB()
+
+    #Muestra ventana de error
+    def dialogoError(self):
+        QMessageBox.warning(
+        self, " Error", "Pasaron más de 10 segundos")
+
+    #Cierra el Dialogo con el Progress Bar
+    def cerrarDialogoPB(self):
+        if self.subdialog.isVisible():
             self.c=0
             self.timer.stop()
             self.subdialog.progressBar.setValue(0)
@@ -126,18 +162,7 @@ def validacion_operacionesigual(cadena):
     if cadena=="x" or cadena=="-" or cadena=="+" or cadena=="/" or cadena=="=" or cadena=="*":
         return True
     else:
-        return False        
-
-class Dialog(QWidget, Ui_Dialog):
-    def __init__(self):
-        # llamamos al constructor
-        super().__init__()
-        # generamos la interfaz de la subventana
-        self.setupUi(self)
-        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
-        # señal para cerrar la subventana
-        #self.pushButton.clicked.connect(self.close)
-
+        return False       
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
