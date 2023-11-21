@@ -12,7 +12,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         #Variables
-        self.c=0
+        self.c=19
         self.flag10=False
         self.limite=0
 
@@ -109,19 +109,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #Función de dialogo de la Progress Bar
     def mostrarDialogo(self, resultado):
 
-        if resultado>10:
-            resultado=10
+        if resultado>=10:
+            resultado=9
             self.flag10=True
 
         self.limite=resultado*20
-
+        self.subdialog.progressBar.setMaximum(self.limite)
         #Mostrar ProgressBar
         self.timer= QTimer()
-        self.timer.setInterval(50) #Intervalos de un segundo
+        self.timer.setInterval(50) #Intervalos de un segundo (1/20 de segundo)
         self.subdialog.show()
 
         #QTimer
-        self.c=0
+        self.c=19
         self.subdialog.progressBar.reset()
         self.subdialog.progressBar.setValue(0)
         self.timer.start()
@@ -131,7 +131,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def counter(self):
         self.c +=1
         self.subdialog.progressBar.setValue(self.c)
-        if self.c>=self.limite:
+        if self.c>self.limite:
             #Condición para saber si pasaron más de 10 segundos marque un error
             if self.flag10:
                 self.flag10 = False
@@ -147,7 +147,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #Cierra el Dialogo con el Progress Bar
     def cerrarDialogoPB(self):
         if self.subdialog.isVisible():
-            self.c=0
+            self.c=19
             self.timer.stop()
             self.subdialog.progressBar.setValue(0)
             self.subdialog.close()
