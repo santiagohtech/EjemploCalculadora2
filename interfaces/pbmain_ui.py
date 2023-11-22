@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'pbmaincLVrNO.ui'
+## Form generated from reading UI file 'pbmain.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.6.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -22,9 +22,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(550, 70)
-        Dialog.setMinimumSize(QSize(550, 70))
-        Dialog.setMaximumSize(QSize(550, 70))
+        Dialog.resize(550, 80)
+        Dialog.setMinimumSize(QSize(550, 80))
+        Dialog.setMaximumSize(QSize(550, 80))
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label = QLabel(Dialog)
@@ -34,8 +34,8 @@ class Ui_Dialog(object):
 
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMaximum(200)
         self.progressBar.setValue(24)
-        self.progressBar.setTextVisible(False)
 
         self.verticalLayout.addWidget(self.progressBar)
 
