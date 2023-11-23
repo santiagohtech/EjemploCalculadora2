@@ -15,11 +15,8 @@
 # @section notes_dialogpb Notas
 # - Se hacen varias operaciones para llenar la Progress Bar
 #
-# @section todo_sensors TODO
-# - None.
-#
-# @section author_sensors Autore(s)
-# - Creado por Santiago Carrillo on 22/11/2023.
+# @section author_dialogpb Autore(s)
+# - Creado por Santiago Carrillo en 22/11/2023.
 #
 # Copyright (c) 2023 Santiago Carrillo.  All rights reserved.
 
@@ -31,12 +28,20 @@ from PySide6 import QtCore
 import sys
 
 class Dialog(QWidget, Ui_Dialog):
-    def __init__(self):
+    """! Clase principal del Dialog
+    Contiene un Progress Bar y un Label
+    """
 
-        #Variables
+    def __init__(self):
+        """! Clase inicializadora del Dialog
+        """
+        ## Variable para contar cada intervalo en el QTimer
         self.c=0
+        ## Bandera para saber si se sobrepaso el tiempo limite
         self.flag10=False
+        ## Limite de milisegundos
         self.limite=0
+        ## Limite global de segundos
         self.tm=0
 
         super().__init__()
@@ -47,6 +52,15 @@ class Dialog(QWidget, Ui_Dialog):
         
     #Función de dialogo para mostrar la progress bar
     def mostrarDialogo(self, resultado, tmaximo):
+        """! Muestra el QDialog y lo inicializa
+        Muestra el QDialog y se inicializan variables. Se usa un QTimer para contar milisegundos y se usa una función para contar.
+
+        @param resultado Número de segundos que va a durar el QDialog en pantalla
+        @param tmaximo Número de segundos limite que tiene el QDialog para mostrarse
+
+        @return  Pantalla de QDialog
+        """
+
         self.show()
         self.progressBar.setValue(0)
         #Limitar los segundos a 10
@@ -72,6 +86,12 @@ class Dialog(QWidget, Ui_Dialog):
 
     #Contador QTimer
     def counter(self):
+        """! Contador de milisegundos
+        Cuenta milisegundos con el QTimer, se detiene en el limite de milisegundos y va a mostrar un error si se sobrepasa del limite. Se actualiza la Progress Bar con ayuda del contador.
+
+        @return  Actualizaciones en la Progress Bar o una ventana de error que si se sobrepaso el limite.
+        """
+
         self.c +=1
         self.progressBar.setValue(self.c)
         if self.c>self.limite:
@@ -85,6 +105,8 @@ class Dialog(QWidget, Ui_Dialog):
 
     #Cierra el Dialogo con el Progress Bar
     def cerrarDialogoPB(self):
+        """! Cerrar el Dialog
+        """
         if self.isVisible():
             self.c=0
             self.timer.stop()

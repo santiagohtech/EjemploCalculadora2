@@ -1,0 +1,95 @@
+\doxysection{Referencia de la clase dialogpb.\+Dialog}
+\hypertarget{classdialogpb_1_1_dialog}{}\label{classdialogpb_1_1_dialog}\index{dialogpb.Dialog@{dialogpb.Dialog}}
+
+
+Clase principal del Dialog Contiene un Progress Bar y un Label.  
+
+
+Diagrama de herencia de dialogpb.\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdialogpb_1_1_dialog}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classdialogpb_1_1_dialog_a8b7cee085a802132e68e867901cad4e0}\label{classdialogpb_1_1_dialog_a8b7cee085a802132e68e867901cad4e0} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Clase inicializadora del Dialog. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classdialogpb_1_1_dialog_afda2b96ec7320ddd3cf1c642d9fb3171}{mostrar\+Dialogo}} (self, resultado, tmaximo)
+\begin{DoxyCompactList}\small\item\em Muestra el QDialog y lo inicializa Muestra el QDialog y se inicializan variables. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classdialogpb_1_1_dialog_a2602cbad1f2d0902210a5021de092ebd}{counter}} (self)
+\begin{DoxyCompactList}\small\item\em Contador de milisegundos Cuenta milisegundos con el QTimer, se detiene en el limite de milisegundos y va a mostrar un error si se sobrepasa del limite. \end{DoxyCompactList}\item 
+\Hypertarget{classdialogpb_1_1_dialog_adce96278b5c1fa6f6e828f6e48e7db40}\label{classdialogpb_1_1_dialog_adce96278b5c1fa6f6e828f6e48e7db40} 
+{\bfseries cerrar\+Dialogo\+PB} (self)
+\begin{DoxyCompactList}\small\item\em Cerrar el Dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classdialogpb_1_1_dialog_ac0d64dc9275eb6876eae2d23b2137ccd}\label{classdialogpb_1_1_dialog_ac0d64dc9275eb6876eae2d23b2137ccd} 
+{\bfseries c}
+\begin{DoxyCompactList}\small\item\em Variable para contar cada intervalo en el QTimer. \end{DoxyCompactList}\item 
+\Hypertarget{classdialogpb_1_1_dialog_a1eb778d7cf47a039d3e184c08af7a383}\label{classdialogpb_1_1_dialog_a1eb778d7cf47a039d3e184c08af7a383} 
+{\bfseries flag10}
+\begin{DoxyCompactList}\small\item\em Bandera para saber si se sobrepaso el tiempo limite. \end{DoxyCompactList}\item 
+\Hypertarget{classdialogpb_1_1_dialog_a847c0247b05a1b51131cb881834a5e08}\label{classdialogpb_1_1_dialog_a847c0247b05a1b51131cb881834a5e08} 
+{\bfseries limite}
+\begin{DoxyCompactList}\small\item\em Limite de milisegundos. \end{DoxyCompactList}\item 
+\Hypertarget{classdialogpb_1_1_dialog_a75c993c61f9105a45c7b3d71bb60a96c}\label{classdialogpb_1_1_dialog_a75c993c61f9105a45c7b3d71bb60a96c} 
+{\bfseries tm}
+\begin{DoxyCompactList}\small\item\em Limite global de segundos. \end{DoxyCompactList}\item 
+\Hypertarget{classdialogpb_1_1_dialog_af050a5422afd466d2216256041c76168}\label{classdialogpb_1_1_dialog_af050a5422afd466d2216256041c76168} 
+{\bfseries timer}
+\item 
+\Hypertarget{classdialogpb_1_1_dialog_a9a8478af596a7d6c9d8dcfe79394c776}\label{classdialogpb_1_1_dialog_a9a8478af596a7d6c9d8dcfe79394c776} 
+{\bfseries counter}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Clase principal del Dialog Contiene un Progress Bar y un Label. 
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classdialogpb_1_1_dialog_a2602cbad1f2d0902210a5021de092ebd}\label{classdialogpb_1_1_dialog_a2602cbad1f2d0902210a5021de092ebd} 
+\index{dialogpb.Dialog@{dialogpb.Dialog}!counter@{counter}}
+\index{counter@{counter}!dialogpb.Dialog@{dialogpb.Dialog}}
+\doxysubsubsection{\texorpdfstring{counter()}{counter()}}
+{\footnotesize\ttfamily dialogpb.\+Dialog.\+counter (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Contador de milisegundos Cuenta milisegundos con el QTimer, se detiene en el limite de milisegundos y va a mostrar un error si se sobrepasa del limite. 
+
+Se actualiza la Progress Bar con ayuda del contador.
+
+\begin{DoxyReturn}{Devuelve}
+Actualizaciones en la Progress Bar o una ventana de error que si se sobrepaso el limite. 
+\end{DoxyReturn}
+\Hypertarget{classdialogpb_1_1_dialog_afda2b96ec7320ddd3cf1c642d9fb3171}\label{classdialogpb_1_1_dialog_afda2b96ec7320ddd3cf1c642d9fb3171} 
+\index{dialogpb.Dialog@{dialogpb.Dialog}!mostrarDialogo@{mostrarDialogo}}
+\index{mostrarDialogo@{mostrarDialogo}!dialogpb.Dialog@{dialogpb.Dialog}}
+\doxysubsubsection{\texorpdfstring{mostrarDialogo()}{mostrarDialogo()}}
+{\footnotesize\ttfamily dialogpb.\+Dialog.\+mostrar\+Dialogo (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{resultado,  }\item[{}]{tmaximo }\end{DoxyParamCaption})}
+
+
+
+Muestra el QDialog y lo inicializa Muestra el QDialog y se inicializan variables. 
+
+Se usa un QTimer para contar milisegundos y se usa una función para contar.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em resultado} & Número de segundos que va a durar el QDialog en pantalla \\
+\hline
+{\em tmaximo} & Número de segundos limite que tiene el QDialog para mostrarse\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Pantalla de QDialog 
+\end{DoxyReturn}
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dialogpb_8py}{dialogpb.\+py}}\end{DoxyCompactItemize}

@@ -1,18 +1,64 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QButtonGroup, QProgressBar, QMessageBox
-from PySide6.QtCore import qDebug, QTimer
+"""! @brief Clase Principal de la Calculadora."""
+
+##
+# @mainpage Calculadora
+#
+# @section description_main Descripción
+# Ejemplo de una calculadora basica donde se muestra una Dialog con Progress bar
+# que aumentan según el resultado.
+#
+# @section notes_main Notas
+# - Se llama al archivo de dialogpb.py
+#
+# Copyright (c) 2023 Santiago Carrillo. All rights reserved.
+
+##
+# @file mainfuntion.py
+#
+# @brief Clase Principal de la Calculadora.
+#
+# @section description_mainfuntion Descripción
+# Ejemplo de una calculadora basica donde se muestra una Dialog con Progress bar
+# que aumentan según el resultado.
+#
+# @section libraries_main Librerias/Modulos
+# - sys (https://docs.python.org/es/3/library/sys.html)
+#   - Parámetros y funciones específicos del sistema.
+# - re (https://docs.python.org/es/3/library/sys.html)
+#   - Operaciones con expresiones regulares.
+#
+# @section notes_mainfuntion Notas
+# - Se llama al archivo de dialogpb.py
+#
+# @section author_mainfuntion Autor(s)
+# - Creado por Santiago Carrillo en 13/11/2023.
+# - Modificado por Santiago Carrillo en 23/11/2023.
+#
+# Copyright (c) 2023 Santiago Carrillo. All rights reserved.
+
+# Imports
+from PySide6.QtWidgets import QApplication, QMainWindow, QButtonGroup
 from PySide6.QtGui import *
 from dialogpb import *
 from interfaces.ui_mainwindow import Ui_MainWindow
 import sys
 import re
 
+# Funciones
 class MainWindow(QMainWindow, Ui_MainWindow):
+    """! Clase principal de la calculadora
+    """
+
     def __init__(self):
+        """! Clase inicializadora del la calculadora
+
+        """  
         super().__init__()
         self.setupUi(self)
 
-
         #Agregar todos los botones a un btn group
+
+         ## Variable en la que se agregan todos los botones de la calculadora
         self.btn_grp = QButtonGroup()
         self.btn_grp.setExclusive(True)
         self.btn_grp.addButton(self.pushButton_0)
@@ -37,6 +83,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.subdialog = Dialog()
 
     def on_click(self, value):
+        """! Al seleccionar un botón se extrae su texto y se hacen validaciones
+        Algunas valiciones son:
+            -Que el primer caracter no sea 0.
+            -No se pueden poner dos operaciones seguidas.
+            -No se pueden poner dos puntos en un mismo número.
+        """
+
         strlabel=self.label.text()
 
         if strlabel=="0": #Validación primer caracter
@@ -67,7 +120,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print(auxres)
 
             #Función de dialogo de la Progress Bar
-            self.subdialog.mostrarDialogo(resultado=int(eval(auxres)),tmaximo=50)
+            self.subdialog.mostrarDialogo(resultado=int(eval(auxres)),tmaximo=25)
 
             self.label.setText(str(eval(auxres)))
 
@@ -97,12 +150,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.label.setText(self.label.text()+value.text())
 
 def validacion_operacionesdif(cadena):
+    """! Valida un caracter para saber si es una operación
+
+    @return  Boolean
+    """
+
     if cadena!="x" and cadena!="-" and cadena!="+" and cadena!="/" and cadena!="=" and cadena!="*":
         return True
     else:
         return False
 
 def validacion_operacionesigual(cadena):
+    """! Valida un caracter para saber si no es una operación
+
+    @return  Boolean
+    """    
     if cadena=="x" or cadena=="-" or cadena=="+" or cadena=="/" or cadena=="=" or cadena=="*":
         return True
     else:
@@ -112,4 +174,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
